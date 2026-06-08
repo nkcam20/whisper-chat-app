@@ -144,7 +144,7 @@ export default function ChannelMessageInput({ channelId, channelName }: ChannelM
           <motion.div 
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
-            className="h-full bg-accent-blue shadow-[0_0_8px_rgba(96,165,250,0.6)]" 
+            className="h-full bg-accent-primary shadow-[0_0_8px_rgba(96,165,250,0.6)]" 
           />
         </div>
       )}
@@ -170,7 +170,7 @@ export default function ChannelMessageInput({ channelId, channelName }: ChannelM
           <div className="px-5 py-3.5 flex items-center gap-3 bg-zinc-50 dark:bg-zinc-900/20 border-b dark:border-zinc-900">
             <div className="relative">
               {filePreview.file.type.startsWith("image") ? (
-                <div className="w-16 h-16 rounded-xl overflow-hidden ring-4 ring-accent-blue/20">
+                <div className="w-16 h-16 rounded-xl overflow-hidden ring-4 ring-accent-primary/20">
                    <img src={filePreview.url} alt="preview" className="w-full h-full object-cover" />
                 </div>
               ) : (
@@ -188,7 +188,7 @@ export default function ChannelMessageInput({ channelId, channelName }: ChannelM
             </div>
             <div className="min-w-0">
               <p className="text-xs font-black truncate max-w-[200px]">{filePreview.file.name}</p>
-              <p className="text-[9px] text-accent-blue font-black uppercase tracking-wider mt-0.5">
+              <p className="text-[9px] text-accent-primary font-black uppercase tracking-wider mt-0.5">
                 {(filePreview.file.size / 1024 / 1024).toFixed(2)} MB • Channel upload
               </p>
             </div>
@@ -204,7 +204,7 @@ export default function ChannelMessageInput({ channelId, channelName }: ChannelM
               type="button"
               disabled={uploading}
               onClick={() => setShowEmoji((v) => !v)}
-              className={`p-2 rounded-lg transition-all ${showEmoji ? "bg-white text-accent-blue dark:bg-zinc-800 shadow-sm" : "text-zinc-400 hover:text-zinc-600"}`}
+              className={`p-2 rounded-lg transition-all ${showEmoji ? "bg-white text-accent-primary dark:bg-zinc-800 shadow-sm" : "text-zinc-400 hover:text-zinc-600"}`}
               title="Emoji"
             >
               <Smile className="w-4.5 h-4.5" />
@@ -232,7 +232,7 @@ export default function ChannelMessageInput({ channelId, channelName }: ChannelM
             ref={inputRef}
             type="text"
             disabled={uploading}
-            className="w-full pl-4 pr-11 py-3 bg-zinc-100 dark:bg-zinc-900 border dark:border-zinc-800 rounded-xl text-xs focus:ring-2 focus:ring-accent-blue/15 font-medium transition-all text-zinc-800 dark:text-zinc-200 placeholder-zinc-400 outline-none"
+            className="w-full pl-4 pr-11 py-3 bg-zinc-100 dark:bg-zinc-900 border dark:border-zinc-800 rounded-xl text-xs focus:ring-2 focus:ring-accent-primary/15 font-medium transition-all text-zinc-800 dark:text-zinc-200 placeholder-zinc-400 outline-none"
             placeholder={uploading ? "Broadcasting signal..." : `Message #${channelName}`}
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -244,7 +244,7 @@ export default function ChannelMessageInput({ channelId, channelName }: ChannelM
             disabled={uploading || (!text.trim() && !filePreview)}
             className={`absolute right-1.5 p-1.5 rounded-lg transition-all ${
               text.trim() || filePreview
-                ? "bg-accent-blue text-white shadow-md shadow-accent-blue/20 scale-100"
+                ? "bg-accent-primary text-white shadow-md shadow-accent-primary/20 scale-100"
                 : "bg-zinc-200 dark:bg-zinc-800 text-zinc-400 scale-95 opacity-0"
             }`}
           >

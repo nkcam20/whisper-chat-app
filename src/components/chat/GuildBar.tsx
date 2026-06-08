@@ -37,7 +37,7 @@ export default function GuildBar({
         onMouseLeave={() => setHoveredId(null)}
         onClick={() => onServerSelect(null)}
       >
-        <div className="absolute left-0 w-1 bg-accent-pink rounded-r-full transition-all duration-300 origin-left scale-y-0 group-hover:scale-y-100 group-hover:h-5 h-5"
+        <div className="absolute left-0 w-1 bg-accent-primary rounded-r-full transition-all duration-300 origin-left scale-y-0 group-hover:scale-y-100 group-hover:h-5 h-5"
           style={{ 
             transform: activeServerId === null ? "scaleY(1)" : "scaleY(0)", 
             height: activeServerId === null ? "40px" : "20px" 
@@ -46,8 +46,8 @@ export default function GuildBar({
         
         <div className={`w-12 h-12 flex items-center justify-center guild-icon-transition ${
           activeServerId === null 
-            ? "bg-accent-pink text-white rounded-[14px]" 
-            : "bg-white dark:bg-zinc-800 text-accent-pink hover:bg-accent-pink hover:text-white"
+            ? "bg-accent-primary text-white rounded-[14px]" 
+            : "bg-white dark:bg-zinc-800 text-accent-primary hover:bg-accent-primary hover:text-white"
         } shadow-md`}>
           <MessageSquare className="w-5 h-5" />
         </div>
@@ -90,7 +90,7 @@ export default function GuildBar({
               onClick={() => onServerSelect(server.id)}
             >
               <div 
-                className="absolute left-0 w-1 bg-accent-blue rounded-r-full transition-all duration-300 origin-left scale-y-0 group-hover:scale-y-100 group-hover:h-5 h-5"
+                className="absolute left-0 w-1 bg-accent-primary rounded-r-full transition-all duration-300 origin-left scale-y-0 group-hover:scale-y-100 group-hover:h-5 h-5"
                 style={{ 
                   transform: isActive ? "scaleY(1)" : "scaleY(0)", 
                   height: isActive ? "40px" : "20px" 
@@ -99,8 +99,8 @@ export default function GuildBar({
 
               <div className={`w-12 h-12 flex items-center justify-center font-black text-sm guild-icon-transition shadow-sm ${
                 isActive 
-                  ? "bg-accent-blue text-white rounded-[14px]" 
-                  : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-accent-blue hover:text-white"
+                  ? "bg-accent-primary text-white rounded-[14px]" 
+                  : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-accent-primary hover:text-white"
               }`}>
                 {initials || <Hash className="w-5 h-5" />}
               </div>
@@ -129,7 +129,7 @@ export default function GuildBar({
           onMouseLeave={() => setHoveredId(null)}
           onClick={onCreateServerClick}
         >
-          <div className="w-12 h-12 flex items-center justify-center rounded-[50%] bg-white dark:bg-zinc-800 text-accent-pink hover:bg-accent-pink hover:text-white hover:rounded-[14px] transition-all duration-300 shadow-sm border border-dashed border-accent-pink/40">
+          <div className="w-12 h-12 flex items-center justify-center rounded-[50%] bg-white dark:bg-zinc-800 text-accent-primary hover:bg-accent-primary hover:text-white hover:rounded-[14px] transition-all duration-300 shadow-sm border border-dashed border-accent-primary/40">
             <Plus className="w-5 h-5" />
           </div>
 
@@ -154,7 +154,7 @@ export default function GuildBar({
           onMouseLeave={() => setHoveredId(null)}
           onClick={onJoinServerClick}
         >
-          <div className="w-12 h-12 flex items-center justify-center rounded-[50%] bg-white dark:bg-zinc-800 text-accent-blue hover:bg-accent-blue hover:text-white hover:rounded-[14px] transition-all duration-300 shadow-sm border border-dashed border-accent-blue/40">
+          <div className="w-12 h-12 flex items-center justify-center rounded-[50%] bg-white dark:bg-zinc-800 text-accent-primary hover:bg-accent-primary hover:text-white hover:rounded-[14px] transition-all duration-300 shadow-sm border border-dashed border-accent-primary/40">
             <Compass className="w-5 h-5" />
           </div>
 
@@ -183,7 +183,7 @@ export default function GuildBar({
           {theme === "dark" ? (
             <Sun className="w-4.5 h-4.5 text-amber-500" />
           ) : (
-            <Moon className="w-4.5 h-4.5 text-accent-blue" />
+            <Moon className="w-4.5 h-4.5 text-accent-primary" />
           )}
         </button>
         

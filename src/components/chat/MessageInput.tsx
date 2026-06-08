@@ -153,7 +153,7 @@ export default function MessageInput({ chatId }: { chatId: string }) {
           <motion.div 
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
-            className="h-full bg-accent-blue shadow-[0_0_8px_rgba(96,165,250,0.6)]" 
+            className="h-full bg-accent-primary shadow-[0_0_8px_rgba(96,165,250,0.6)]" 
           />
         </div>
       )}
@@ -270,7 +270,7 @@ export default function MessageInput({ chatId }: { chatId: string }) {
               disabled={uploading || (!text.trim() && !filePreview)}
               className={`absolute right-1.5 p-1.5 rounded-xl transition-all ${
                 text.trim() || filePreview
-                  ? "bg-accent-blue text-white shadow-sm scale-100 opacity-100"
+                  ? "bg-accent-primary text-white shadow-sm scale-100 opacity-100"
                   : "bg-transparent text-zinc-400 scale-90 opacity-0 pointer-events-none"
               }`}
             >

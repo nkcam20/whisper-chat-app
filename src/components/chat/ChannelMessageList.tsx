@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { useChannelMessages, ChannelMessage } from "@/hooks/useDiscord";
+import { useChannelMessages, ChannelMessage, useSendChannelMessage } from "@/hooks/useDiscord";
 import { format } from "date-fns";
-import { Hash, Sparkles } from "lucide-react";
+import { Hash, Sparkles, Smile, Trash2 } from "lucide-react";
+import { useAuth } from "@/context/AuthProvider";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ChannelMessageListProps {
@@ -12,7 +13,9 @@ interface ChannelMessageListProps {
 }
 
 export default function ChannelMessageList({ channelId, channelName }: ChannelMessageListProps) {
+  const { user } = useAuth();
   const { messages, loading } = useChannelMessages(channelId);
+  const { deleteChannelMessage, addChannelReaction, removeChannelReaction } = useSendChannelMessage();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,7 +37,7 @@ export default function ChannelMessageList({ channelId, channelName }: ChannelMe
     >
       {/* Welcome Message at the very top of the channel */}
       <div className="py-8 border-b dark:border-zinc-900 mb-6 flex flex-col items-start text-left">
-        <div className="w-12 h-12 rounded-2xl bg-accent-blue/10 flex items-center justify-center text-accent-blue mb-4">
+        <div className="w-12 h-12 rounded-2xl bg-accent-primary/10 flex items-center justify-center text-accent-primary mb-4">
           <Hash className="w-6 h-6" />
         </div>
         <h2 className="text-xl font-black">Welcome to #{channelName}!</h2>
@@ -49,10 +52,25 @@ export default function ChannelMessageList({ channelId, channelName }: ChannelMe
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             key={msg.id}
-            className="flex items-start gap-3.5 group hover:bg-zinc-50/50 dark:hover:bg-zinc-900/10 p-2.5 -mx-2.5 rounded-xl transition-all"
+            className="flex items-start gap-3.5 group hover:bg-zinc-50/50 dark:hover:bg-zinc-900/10 p-2.5 -mx-2.5 rounded-xl transition-all relative"
           >
+            {/* Actions Hover Menu */}
+            <div className={`absolute top-2 right-2 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-white dark:bg-zinc-900 border dark:border-zinc-800 p-1 rounded-xl shadow-sm`}>
+              <button onClick={() => addChannelReaction(channelId, msg.id, '👍')} className="p-1 text-zinc-500 hover:text-accent-primary hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md transition-colors">
+                <Smile className="w-3.5 h-3.5" />
+              </button>
+              <button onClick={() => addChannelReaction(channelId, msg.id, '❤️')} className="p-1 text-zinc-500 hover:text-rose-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md transition-colors text-xs">
+                ❤️
+              </button>
+              {msg.senderId === user?.uid && (
+                <button onClick={() => deleteChannelMessage(channelId, msg.id)} className="p-1 text-zinc-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-md transition-colors">
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+
             {/* User Avatar */}
-            <div className="w-9 h-9 rounded-xl bg-accent-blue flex items-center justify-center text-white font-bold text-xs shadow-sm overflow-hidden shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-accent-primary flex items-center justify-center text-white font-bold text-xs shadow-sm overflow-hidden shrink-0">
               {msg.senderAvatar ? (
                 <img src={msg.senderAvatar} alt={msg.senderName} className="w-full h-full object-cover" />
               ) : (
@@ -91,10 +109,29 @@ export default function ChannelMessageList({ channelId, channelName }: ChannelMe
                   href={msg.mediaUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="mt-2 flex items-center gap-2 p-2 rounded-xl bg-zinc-50 dark:bg-zinc-950 border dark:border-zinc-900 text-xs text-zinc-600 dark:text-zinc-400 hover:text-accent-blue transition-all"
+                  className="mt-2 flex items-center gap-2 p-2 rounded-xl bg-zinc-50 dark:bg-zinc-950 border dark:border-zinc-900 text-xs text-zinc-600 dark:text-zinc-400 hover:text-accent-primary transition-all"
                 >
                   <span className="font-bold underline truncate">Download Asset</span>
                 </a>
+              )}
+
+              {/* Reactions Display */}
+              {msg.reactions && Object.entries(msg.reactions).some(([_, uids]) => uids.length > 0) && (
+                <div className={`flex flex-wrap gap-1 mt-2`}>
+                  {Object.entries(msg.reactions).map(([emoji, uids]) => uids.length > 0 && (
+                    <button 
+                      key={emoji}
+                      onClick={() => uids.includes(user?.uid || "") ? removeChannelReaction(channelId, msg.id, emoji) : addChannelReaction(channelId, msg.id, emoji)}
+                      className={`px-1.5 py-0.5 rounded-md text-[10px] font-bold flex items-center gap-1 border transition-all ${
+                        uids.includes(user?.uid || "") 
+                          ? 'bg-accent-primary/10 border-accent-primary/30 text-accent-primary' 
+                          : 'bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900'
+                      }`}
+                    >
+                      <span>{emoji}</span> <span>{uids.length}</span>
+                    </button>
+                  ))}
+                </div>
               )}
             </div>
           </motion.div>

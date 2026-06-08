@@ -10,9 +10,12 @@ import {
   serverTimestamp, 
   doc, 
   updateDoc, 
+  deleteDoc,
   getDoc,
   limit,
-  where
+  where,
+  arrayUnion,
+  arrayRemove
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthProvider";
@@ -27,6 +30,7 @@ export interface Message {
   status: "sent" | "delivered" | "seen";
   type: "text" | "image" | "file";
   mediaUrl?: string;
+  reactions?: Record<string, string[]>; // Map of emoji -> array of UIDs
 }
 
 export interface Chat {
@@ -225,7 +229,8 @@ export const useSendMessage = () => {
       timestamp: serverTimestamp(),
       status: "sent",
       type,
-      mediaUrl: mediaUrl || null
+      mediaUrl: mediaUrl || null,
+      reactions: {}
     };
 
     const msgRef = await addDoc(collection(db, "chats", chatId, "messages"), msgData);
@@ -238,5 +243,26 @@ export const useSendMessage = () => {
     return msgRef.id;
   };
 
-  return { sendMessage };
+  const deleteMessage = async (chatId: string, messageId: string) => {
+    if (!user || !chatId || !messageId) return;
+    await deleteDoc(doc(db, "chats", chatId, "messages", messageId));
+  };
+
+  const addReaction = async (chatId: string, messageId: string, emoji: string) => {
+    if (!user || !chatId || !messageId) return;
+    const msgRef = doc(db, "chats", chatId, "messages", messageId);
+    await updateDoc(msgRef, {
+      [`reactions.${emoji}`]: arrayUnion(user.uid)
+    });
+  };
+
+  const removeReaction = async (chatId: string, messageId: string, emoji: string) => {
+    if (!user || !chatId || !messageId) return;
+    const msgRef = doc(db, "chats", chatId, "messages", messageId);
+    await updateDoc(msgRef, {
+      [`reactions.${emoji}`]: arrayRemove(user.uid)
+    });
+  };
+
+  return { sendMessage, deleteMessage, addReaction, removeReaction };
 };

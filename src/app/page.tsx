@@ -193,8 +193,8 @@ export default function Home() {
 
   if (loading) return (
     <div className="h-screen flex flex-col items-center justify-center bg-background">
-      <div className="w-10 h-10 border-4 border-accent-pink border-t-accent-blue rounded-full animate-spin"></div>
-      <p className="mt-4 text-xs font-black uppercase text-pastel-gradient tracking-widest">Waking up Zenjoy...</p>
+      <div className="w-10 h-10 border-4 border-zinc-200 dark:border-zinc-800 border-t-accent-primary rounded-full animate-spin"></div>
+      <p className="mt-4 text-xs font-black uppercase text-accent-primary tracking-widest">Waking up Zenjoy...</p>
     </div>
   );
   

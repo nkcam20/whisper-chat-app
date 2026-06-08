@@ -45,7 +45,7 @@ export default function VoiceRoom({ channelId, channelName, onDisconnect }: Voic
       {/* 1. Header */}
       <div className="h-16 shrink-0 px-6 flex items-center justify-between border-b dark:border-zinc-900 bg-white/40 dark:bg-zinc-950/40 backdrop-blur-md z-30">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-accent-blue/10 flex items-center justify-center text-accent-blue font-bold">
+          <div className="w-8 h-8 rounded-lg bg-accent-primary/10 flex items-center justify-center text-accent-primary font-bold">
             🔊
           </div>
           <div>
@@ -53,8 +53,8 @@ export default function VoiceRoom({ channelId, channelName, onDisconnect }: Voic
               {channelName}
             </h3>
             <div className="flex items-center gap-1.5 mt-0.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse"></span>
-              <span className="text-[9px] text-accent-blue font-bold uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-primary animate-pulse"></span>
+              <span className="text-[9px] text-accent-primary font-bold uppercase tracking-wider">
                 Ultra-HD Voice Relay Active
               </span>
             </div>
@@ -62,7 +62,7 @@ export default function VoiceRoom({ channelId, channelName, onDisconnect }: Voic
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1 bg-accent-pink/10 border border-accent-pink/20 rounded-md px-2 py-0.5 text-[8px] text-accent-pink font-black uppercase tracking-wider">
+          <div className="flex items-center gap-1 bg-accent-primary/10 border border-accent-primary/20 rounded-md px-2 py-0.5 text-[8px] text-accent-primary font-black uppercase tracking-wider">
             <ShieldCheck className="w-2.5 h-2.5 mr-1 inline-block" /> E2E Secured Tunnel
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function VoiceRoom({ channelId, channelName, onDisconnect }: Voic
                   exit={{ opacity: 0, scale: 0.9 }}
                   className={`relative aspect-video rounded-2xl p-4 flex flex-col items-center justify-center bg-white dark:bg-zinc-900 shadow-sm border transition-all ${
                     isSpeaking 
-                      ? "speaking-border bg-gradient-to-br from-accent-pink/5 to-accent-blue/5" 
+                      ? "speaking-border bg-gradient-to-br from-accent-primary/5 to-accent-primary/5" 
                       : "dark:border-zinc-800/80"
                   }`}
                 >
@@ -104,7 +104,7 @@ export default function VoiceRoom({ channelId, channelName, onDisconnect }: Voic
                   <div className="relative group">
                     <div className={`w-16 h-16 rounded-[24px] overflow-hidden flex items-center justify-center text-lg font-black transition-all ${
                       isSpeaking 
-                        ? "ring-4 ring-accent-pink scale-105 shadow-lg shadow-accent-pink/25" 
+                        ? "ring-4 ring-accent-primary scale-105 shadow-lg shadow-accent-primary/25" 
                         : "bg-zinc-100 dark:bg-zinc-800"
                     }`}>
                       {voiceUser.avatar ? (
@@ -114,7 +114,7 @@ export default function VoiceRoom({ channelId, channelName, onDisconnect }: Voic
                       )}
                     </div>
                     {isSpeaking && (
-                      <span className="absolute -bottom-1 -right-1 flex gap-0.5 bg-accent-pink text-white text-[8px] font-black px-1.5 py-0.5 rounded-md uppercase tracking-wider animate-pulse">
+                      <span className="absolute -bottom-1 -right-1 flex gap-0.5 bg-accent-primary text-white text-[8px] font-black px-1.5 py-0.5 rounded-md uppercase tracking-wider animate-pulse">
                         Speaking
                       </span>
                     )}
@@ -165,7 +165,7 @@ export default function VoiceRoom({ channelId, channelName, onDisconnect }: Voic
           onClick={() => setIsCameraOn(prev => !prev)}
           className={`p-3.5 rounded-2xl flex items-center justify-center transition-all shadow-sm active:scale-95 ${
             isCameraOn 
-              ? "bg-accent-pink text-white hover:bg-accent-pink-hover" 
+              ? "bg-accent-primary text-white hover:bg-accent-primary-hover" 
               : "bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 border dark:border-zinc-800"
           }`}
           title={isCameraOn ? "Disable Camera" : "Enable Camera"}

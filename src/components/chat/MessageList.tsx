@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { useMessages, Message } from "@/hooks/useChat";
+import { useMessages, Message, useSendMessage } from "@/hooks/useChat";
 import { useAuth } from "@/context/AuthProvider";
 import { format } from "date-fns";
-import { Check, CheckCheck, Lock, Paperclip } from "lucide-react";
+import { Check, CheckCheck, Lock, Paperclip, Smile, Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function MessageList({ chatId }: { chatId: string }) {
   const { messages, loading } = useMessages(chatId);
+  const { deleteMessage, addReaction, removeReaction } = useSendMessage();
   const { user } = useAuth();
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -48,9 +49,23 @@ export default function MessageList({ chatId }: { chatId: string }) {
             >
               <div className={`max-w-[85%] sm:max-w-[70%] px-4 py-2.5 rounded-2xl shadow-sm relative transition-all ${
                 isMe 
-                ? "bg-accent-blue text-white rounded-br-sm shadow-accent-blue/10" 
+                ? "bg-accent-primary text-white rounded-br-sm shadow-accent-primary/10" 
                 : "bg-white dark:bg-zinc-800/80 backdrop-blur-sm text-foreground rounded-bl-sm border border-zinc-100 dark:border-zinc-700/50 shadow-sm dark:shadow-none"
               }`}>
+                {/* Actions Hover Menu */}
+                <div className={`absolute -top-3 ${isMe ? "-left-8" : "-right-8"} flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10`}>
+                  {isMe && (
+                    <button onClick={() => deleteMessage(chatId, msg.id)} className="p-1.5 bg-red-500 text-white rounded-full shadow-sm hover:scale-110 transition-transform">
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                  <button onClick={() => addReaction(chatId, msg.id, '👍')} className="p-1.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 rounded-full shadow-sm border dark:border-zinc-700 hover:text-accent-primary hover:scale-110 transition-transform">
+                    <Smile className="w-3.5 h-3.5" />
+                  </button>
+                  <button onClick={() => addReaction(chatId, msg.id, '❤️')} className="p-1.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 rounded-full shadow-sm border dark:border-zinc-700 hover:text-rose-500 hover:scale-110 transition-transform">
+                    ❤️
+                  </button>
+                </div>
                 {msg.text && (
                   <p className="text-[14px] leading-relaxed whitespace-pre-wrap break-words">{msg.text}</p>
                 )}
@@ -103,6 +118,25 @@ export default function MessageList({ chatId }: { chatId: string }) {
                     </span>
                   )}
                 </div>
+
+                {/* Reactions Display */}
+                {msg.reactions && Object.entries(msg.reactions).some(([_, uids]) => uids.length > 0) && (
+                  <div className={`flex flex-wrap gap-1 mt-2 ${isMe ? "justify-end" : "justify-start"}`}>
+                    {Object.entries(msg.reactions).map(([emoji, uids]) => uids.length > 0 && (
+                      <button 
+                        key={emoji}
+                        onClick={() => uids.includes(user?.uid || "") ? removeReaction(chatId, msg.id, emoji) : addReaction(chatId, msg.id, emoji)}
+                        className={`px-1.5 py-0.5 rounded-md text-[10px] font-bold flex items-center gap-1 border transition-all ${
+                          uids.includes(user?.uid || "") 
+                            ? (isMe ? 'bg-white/20 border-white/40 text-white' : 'bg-accent-primary/10 border-accent-primary/30 text-accent-primary') 
+                            : (isMe ? 'bg-black/10 border-transparent text-white/80' : 'bg-zinc-100 dark:bg-zinc-800 border-transparent text-zinc-500')
+                        }`}
+                      >
+                        <span>{emoji}</span> <span>{uids.length}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </motion.div>
           );

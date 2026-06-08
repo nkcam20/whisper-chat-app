@@ -44,11 +44,11 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-6 font-sans selection:bg-accent-blue/30 overflow-hidden relative">
+    <div className="min-h-screen flex items-center justify-center bg-background p-6 font-sans selection:bg-accent-primary/30 overflow-hidden relative">
       {/* Soft Pastel Background Blobs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-         <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent-pink/20 dark:bg-accent-pink/5 blur-[120px] rounded-full"></div>
-         <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-accent-blue/20 dark:bg-accent-blue/5 blur-[120px] rounded-full"></div>
+         <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent-primary/20 dark:bg-accent-primary/5 blur-[120px] rounded-full"></div>
+         <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-accent-primary/20 dark:bg-accent-primary/5 blur-[120px] rounded-full"></div>
       </div>
 
       <motion.div 
@@ -62,7 +62,7 @@ export default function SignupPage() {
               initial={{ rotate: -10, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="inline-flex items-center justify-center w-20 h-20 mb-6 bg-gradient-to-br from-accent-pink to-accent-blue rounded-[28px] text-white shadow-lg shadow-accent-blue/20"
+              className="inline-flex items-center justify-center w-20 h-20 mb-6 bg-gradient-to-br from-accent-primary to-accent-primary rounded-[28px] text-white shadow-lg shadow-accent-primary/20"
             >
               <UserPlus className="w-10 h-10" />
             </motion.div>
@@ -73,7 +73,7 @@ export default function SignupPage() {
           <form className="space-y-5" onSubmit={handleSignup}>
             <div className="space-y-4">
               <div className="group relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-accent-blue text-zinc-400">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-accent-primary text-zinc-400">
                   <User className="h-5 w-5" />
                 </div>
                 <input
@@ -81,12 +81,12 @@ export default function SignupPage() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="block w-full pl-12 pr-4 py-3.5 bg-zinc-50 dark:bg-zinc-950/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl text-foreground placeholder-zinc-400 focus:outline-none focus:border-accent-blue/50 focus:ring-4 focus:ring-accent-blue/10 transition-all font-medium text-sm"
+                  className="block w-full pl-12 pr-4 py-3.5 bg-zinc-50 dark:bg-zinc-950/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl text-foreground placeholder-zinc-400 focus:outline-none focus:border-accent-primary/50 focus:ring-4 focus:ring-accent-primary/10 transition-all font-medium text-sm"
                   placeholder="Full name"
                 />
               </div>
               <div className="group relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-accent-blue text-zinc-400">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-accent-primary text-zinc-400">
                   <Mail className="h-5 w-5" />
                 </div>
                 <input
@@ -94,12 +94,12 @@ export default function SignupPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-12 pr-4 py-3.5 bg-zinc-50 dark:bg-zinc-950/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl text-foreground placeholder-zinc-400 focus:outline-none focus:border-accent-blue/50 focus:ring-4 focus:ring-accent-blue/10 transition-all font-medium text-sm"
+                  className="block w-full pl-12 pr-4 py-3.5 bg-zinc-50 dark:bg-zinc-950/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl text-foreground placeholder-zinc-400 focus:outline-none focus:border-accent-primary/50 focus:ring-4 focus:ring-accent-primary/10 transition-all font-medium text-sm"
                   placeholder="Email address"
                 />
               </div>
               <div className="group relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-accent-blue text-zinc-400">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-accent-primary text-zinc-400">
                   <Lock className="h-5 w-5" />
                 </div>
                 <input
@@ -107,7 +107,7 @@ export default function SignupPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-12 pr-4 py-3.5 bg-zinc-50 dark:bg-zinc-950/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl text-foreground placeholder-zinc-400 focus:outline-none focus:border-accent-blue/50 focus:ring-4 focus:ring-accent-blue/10 transition-all font-medium text-sm"
+                  className="block w-full pl-12 pr-4 py-3.5 bg-zinc-50 dark:bg-zinc-950/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl text-foreground placeholder-zinc-400 focus:outline-none focus:border-accent-primary/50 focus:ring-4 focus:ring-accent-primary/10 transition-all font-medium text-sm"
                   placeholder="Password"
                 />
               </div>
@@ -126,7 +126,7 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center items-center py-3.5 px-6 rounded-2xl text-white bg-accent-blue hover:bg-accent-blue-hover font-black text-sm shadow-xl shadow-accent-blue/20 active:scale-[0.98] transition-all disabled:opacity-50"
+              className="w-full flex justify-center items-center py-3.5 px-6 rounded-2xl text-white bg-accent-primary hover:bg-accent-primary-hover font-black text-sm shadow-xl shadow-accent-primary/20 active:scale-[0.98] transition-all disabled:opacity-50"
             >
               {loading ? "Creating account..." : "Sign up"}
             </button>
@@ -134,7 +134,7 @@ export default function SignupPage() {
 
           <p className="mt-8 text-center text-sm font-medium text-text-muted">
             Already have an account?{" "}
-            <Link href="/login" className="text-accent-pink hover:text-accent-pink-hover font-bold transition-colors">
+            <Link href="/login" className="text-accent-primary hover:text-accent-primary-hover font-bold transition-colors">
               Sign in
             </Link>
           </p>
@@ -142,7 +142,7 @@ export default function SignupPage() {
         
         {/* Security Footer */}
         <div className="mt-8 flex items-center justify-center gap-2 text-text-muted">
-           <ShieldCheck className="w-4 h-4 text-accent-blue" />
+           <ShieldCheck className="w-4 h-4 text-accent-primary" />
            <span className="text-[11px] font-bold uppercase tracking-wider">Secure Team Registration</span>
         </div>
       </motion.div>

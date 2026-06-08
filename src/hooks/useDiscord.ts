@@ -10,6 +10,7 @@ import {
   serverTimestamp, 
   doc, 
   updateDoc, 
+  deleteDoc,
   getDoc,
   getDocs,
   limit,
@@ -55,6 +56,7 @@ export interface ChannelMessage {
   timestamp: any;
   type: "text" | "image" | "file";
   mediaUrl?: string;
+  reactions?: Record<string, string[]>;
 }
 
 // Generate random 6 character alphanumeric invite code
@@ -107,7 +109,7 @@ export const useDiscord = () => {
     const inviteCode = generateInviteCode();
     const serverData = {
       name,
-      icon: iconGrad || `bg-gradient-to-br from-accent-pink to-accent-blue`,
+      icon: iconGrad || `bg-gradient-to-br from-accent-primary to-accent-blue`,
       ownerId: user.uid,
       inviteCode,
       members: [user.uid],
@@ -293,13 +295,35 @@ export const useSendChannelMessage = () => {
       type,
       mediaUrl: mediaUrl || null,
       timestamp: serverTimestamp(),
+      reactions: {}
     };
 
     const docRef = await addDoc(collection(db, "channels", channelId, "messages"), messageData);
     return docRef.id;
   };
 
-  return { sendChannelMessage };
+  const deleteChannelMessage = async (channelId: string, messageId: string) => {
+    if (!user || !channelId || !messageId) return;
+    await deleteDoc(doc(db, "channels", channelId, "messages", messageId));
+  };
+
+  const addChannelReaction = async (channelId: string, messageId: string, emoji: string) => {
+    if (!user || !channelId || !messageId) return;
+    const msgRef = doc(db, "channels", channelId, "messages", messageId);
+    await updateDoc(msgRef, {
+      [`reactions.${emoji}`]: arrayUnion(user.uid)
+    });
+  };
+
+  const removeChannelReaction = async (channelId: string, messageId: string, emoji: string) => {
+    if (!user || !channelId || !messageId) return;
+    const msgRef = doc(db, "channels", channelId, "messages", messageId);
+    await updateDoc(msgRef, {
+      [`reactions.${emoji}`]: arrayRemove(user.uid)
+    });
+  };
+
+  return { sendChannelMessage, deleteChannelMessage, addChannelReaction, removeChannelReaction };
 };
 
 // Hook for voice states inside channels
