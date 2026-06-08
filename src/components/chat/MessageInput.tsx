@@ -153,7 +153,7 @@ export default function MessageInput({ chatId }: { chatId: string }) {
           <motion.div 
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
-            className="h-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" 
+            className="h-full bg-accent-blue shadow-[0_0_8px_rgba(96,165,250,0.6)]" 
           />
         </div>
       )}
@@ -185,30 +185,30 @@ export default function MessageInput({ chatId }: { chatId: string }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="px-6 py-4 flex items-center gap-4 bg-zinc-50/50 dark:bg-zinc-900/30 border-b dark:border-zinc-800/50 backdrop-blur-sm"
+            className="px-6 py-4 flex items-center gap-4 bg-zinc-50/50 dark:bg-zinc-900/30 border-b border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-sm"
           >
             <div className="relative group">
               {filePreview.file.type.startsWith("image") ? (
-                <div className="w-20 h-20 rounded-[18px] overflow-hidden ring-4 ring-green-500/20 shadow-xl">
+                <div className="w-20 h-20 rounded-[18px] overflow-hidden ring-2 ring-zinc-200 dark:ring-zinc-800 shadow-sm">
                    <img src={filePreview.url} alt="preview" className="w-full h-full object-cover" />
                 </div>
               ) : (
-                <div className="w-20 h-20 bg-zinc-200 dark:bg-zinc-800 rounded-[18px] flex items-center justify-center ring-4 ring-zinc-500/10 shadow-xl">
-                  <Paperclip className="w-8 h-8 text-zinc-500" />
+                <div className="w-20 h-20 bg-zinc-100 dark:bg-zinc-800 rounded-[18px] flex items-center justify-center ring-2 ring-zinc-200 dark:ring-zinc-700 shadow-sm">
+                  <Paperclip className="w-8 h-8 text-zinc-400" />
                 </div>
               )}
               <button
                 onClick={() => setFilePreview(null)}
-                className="absolute -top-2 -right-2 bg-zinc-950 text-white rounded-full p-1.5 shadow-lg hover:scale-110 active:scale-90 transition-all border border-white/20"
+                className="absolute -top-2 -right-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-full p-1 shadow-md hover:scale-110 active:scale-90 transition-transform"
                 disabled={uploading}
               >
-                <X className="w-3.5 h-3.5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
             <div className="min-w-0">
-              <p className="text-xs font-black text-zinc-900 dark:text-zinc-100 truncate max-w-[200px]">{filePreview.file.name}</p>
-              <p className="text-[10px] font-bold text-green-500 uppercase tracking-widest mt-0.5">
-                {(filePreview.file.size / 1024 / 1024).toFixed(2)} MB • Ready for relay
+              <p className="text-sm font-bold text-foreground truncate max-w-[200px]">{filePreview.file.name}</p>
+              <p className="text-[11px] font-medium text-text-muted mt-0.5">
+                {(filePreview.file.size / 1024 / 1024).toFixed(2)} MB
               </p>
             </div>
           </motion.div>
@@ -251,14 +251,14 @@ export default function MessageInput({ chatId }: { chatId: string }) {
           </label>
         </div>
 
-        {/* Text Input Container */}
+          {/* Text Input Container */}
         <div className="flex-1 relative flex items-center">
             <input
               ref={inputRef}
               type="text"
               disabled={uploading}
-              className="w-full pl-5 pr-12 py-3.5 bg-zinc-100 dark:bg-zinc-900 border dark:border-zinc-800 rounded-[22px] text-sm focus:ring-2 focus:ring-green-500/20 font-medium transition-all dark:text-white placeholder-zinc-400 dark:placeholder-zinc-600 outline-none"
-              placeholder={uploading ? "Broadcasting signal..." : "Establish communication..."}
+              className="w-full pl-5 pr-12 py-3 bg-zinc-100 dark:bg-zinc-900 border border-transparent focus:border-zinc-200 dark:focus:border-zinc-700 rounded-2xl text-sm font-medium transition-all text-foreground placeholder-zinc-500 outline-none"
+              placeholder={uploading ? "Sending..." : "Message..."}
               value={text}
               onChange={(e) => setText(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -268,16 +268,16 @@ export default function MessageInput({ chatId }: { chatId: string }) {
             <button
               type="submit"
               disabled={uploading || (!text.trim() && !filePreview)}
-              className={`absolute right-1.5 p-2 rounded-2xl transition-all ${
+              className={`absolute right-1.5 p-1.5 rounded-xl transition-all ${
                 text.trim() || filePreview
-                  ? "bg-green-500 text-white shadow-lg shadow-green-500/30 scale-100 opacity-100"
-                  : "bg-zinc-200 dark:bg-zinc-800 text-zinc-400 scale-90 opacity-0 pointer-events-none"
+                  ? "bg-accent-blue text-white shadow-sm scale-100 opacity-100"
+                  : "bg-transparent text-zinc-400 scale-90 opacity-0 pointer-events-none"
               }`}
             >
               {uploading ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <Loader2 className="w-4 h-4 animate-spin" />
               ) : (
-                <Send className="w-5 h-5" />
+                <Send className="w-4 h-4" />
               )}
             </button>
         </div>

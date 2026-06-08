@@ -1,41 +1,42 @@
 @import "tailwindcss";
 
 :root {
-  /* Default Light Mode - Soft Pastel Theme */
-  --background: #fff5f7; /* Very soft pink tint */
-  --foreground: #2d3142; /* Soft charcoal */
+  /* Default Light Mode - Premium SaaS Soft Theme */
+  --background: #fafafa;
+  --foreground: #18181b; /* Zinc 900 */
   
-  --guild-bg: #e6effa; /* Pastel baby blue guild bar */
-  --sidebar-bg: #f3f7fc; /* Gentle light blue sidebar */
-  --chat-bg: #ffffff; /* Clean white chat area */
+  --guild-bg: #f4f4f5; /* Zinc 100 */
+  --sidebar-bg: #ffffff; 
+  --chat-bg: #ffffff; 
   --card-bg: #ffffff;
   
-  --accent-pink: #f472b6; /* Baby pink accent */
-  --accent-blue: #60a5fa; /* Baby blue accent */
+  /* Zenjoy Brand Colors */
+  --accent-pink: #f472b6; /* Baby pink */
+  --accent-blue: #60a5fa; /* Baby blue */
   --accent-pink-hover: #ec4899;
   --accent-blue-hover: #3b82f6;
   
-  --border-color: rgba(226, 232, 240, 0.8);
+  --border-color: #e4e4e7; /* Zinc 200 */
   --text-muted: #718096;
 }
 
 .dark {
-  /* Dark Mode - Soft Neon Pastel Cyberpunk */
-  --background: #0f0d13; /* Deep dark violet */
-  --foreground: #f1f3f9;
+  /* Dark Mode - Professional Slate/Zinc Theme */
+  --background: #09090b; /* Zinc 950 */
+  --foreground: #f4f4f5; /* Zinc 100 */
   
-  --guild-bg: #070609;
-  --sidebar-bg: #131019; /* Dark violet-pink sidebar */
-  --chat-bg: #181520; /* Dark pastel chat */
-  --card-bg: #1d1a27;
+  --guild-bg: #09090b; /* Zinc 950 */
+  --sidebar-bg: #18181b; /* Zinc 900 */
+  --chat-bg: #18181b; /* Zinc 900 */
+  --card-bg: #27272a; /* Zinc 800 */
   
   --accent-pink: #f472b6;
   --accent-blue: #60a5fa;
-  --accent-pink-hover: #f472b6;
-  --accent-blue-hover: #60a5fa;
+  --accent-pink-hover: #f9a8d4;
+  --accent-blue-hover: #93c5fd;
   
-  --border-color: rgba(255, 255, 255, 0.05);
-  --text-muted: #a0aec0;
+  --border-color: #27272a; /* Zinc 800 */
+  --text-muted: #a1a1aa; /* Zinc 400 */
 }
 
 @theme inline {
@@ -56,86 +57,70 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
 }
 
-/* Custom scrollbar matching baby pink/blue theme */
+/* Elegant, minimal custom scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(96, 165, 250, 0.15); /* Soft baby blue thumb */
-  border-radius: 20px;
+  background: rgba(161, 161, 170, 0.3); /* Zinc 400 with opacity */
+  border-radius: 12px;
 }
 .custom-scrollbar:hover::-webkit-scrollbar-thumb {
-  background: rgba(244, 114, 182, 0.4); /* Soft baby pink thumb on hover */
+  background: rgba(161, 161, 170, 0.5);
 }
 
-/* Elegant glassmorphism class with pink-blue gradient borders */
+/* Glassmorphism utility for floating cards/modals */
 .pastel-glass {
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--border-color);
 }
 .dark .pastel-glass {
-  background: rgba(24, 21, 32, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(24, 24, 27, 0.85); /* Zinc 900 */
+  border: 1px solid var(--border-color);
 }
 
 /* Gradient text matching the baby pink/blue theme */
 .text-pastel-gradient {
-  background: linear-gradient(135deg, #f472b6 0%, #60a5fa 100%);
+  background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-blue) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Discord logo button and server icons hover transitions */
+/* Guild Icon hover transitions */
 .guild-icon-transition {
   border-radius: 50%;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .guild-icon-transition:hover, .guild-icon-transition.active {
-  border-radius: 14px;
-  background-color: var(--accent-pink);
-  color: white;
+  border-radius: 16px;
 }
 
-/* Double pulse indicator for secure channel */
-@keyframes secure-pink-blue-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(244, 114, 182, 0.5); }
-  50% { box-shadow: 0 0 0 8px rgba(96, 165, 250, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(96, 165, 250, 0); }
+/* Subtle pulse for active E2E indicator */
+@keyframes secure-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(244, 114, 182, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(244, 114, 182, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(244, 114, 182, 0); }
 }
 .secure-pastel-pulse {
-  animation: secure-pink-blue-pulse 2.5s infinite;
+  animation: secure-pulse 2s infinite;
 }
 
-/* Speaking glow animation */
-@keyframes speaking-glow {
-  0%, 100% { border-color: var(--accent-blue); box-shadow: 0 0 8px rgba(96, 165, 250, 0.4); }
-  50% { border-color: var(--accent-pink); box-shadow: 0 0 12px rgba(244, 114, 182, 0.6); }
-}
-.speaking-border {
-  animation: speaking-glow 2s infinite ease-in-out;
+button, a, input, textarea {
+  transition: all 0.2s ease-in-out;
 }
 
-button, a {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-input, textarea {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Smooth page transitions */
 .theme-ready body {
-  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

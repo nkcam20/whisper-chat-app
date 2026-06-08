@@ -46,13 +46,13 @@ export default function MessageList({ chatId }: { chatId: string }) {
               key={msg.id}
               className={`flex ${isMe ? "justify-end" : "justify-start"} group mb-2 last:mb-0`}
             >
-              <div className={`max-w-[85%] sm:max-w-[70%] px-4 py-2.5 rounded-[22px] shadow-sm relative transition-all ${
+              <div className={`max-w-[85%] sm:max-w-[70%] px-4 py-2.5 rounded-2xl shadow-sm relative transition-all ${
                 isMe 
-                ? "bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-tr-none shadow-green-500/10" 
-                : "bg-white dark:bg-zinc-800/80 backdrop-blur-sm text-zinc-900 dark:text-zinc-100 rounded-tl-none border border-zinc-100 dark:border-zinc-700/50 shadow-zinc-200/50 dark:shadow-none"
+                ? "bg-accent-blue text-white rounded-br-sm shadow-accent-blue/10" 
+                : "bg-white dark:bg-zinc-800/80 backdrop-blur-sm text-foreground rounded-bl-sm border border-zinc-100 dark:border-zinc-700/50 shadow-sm dark:shadow-none"
               }`}>
                 {msg.text && (
-                  <p className="text-[14px] leading-[1.5] whitespace-pre-wrap break-words font-medium">{msg.text}</p>
+                  <p className="text-[14px] leading-relaxed whitespace-pre-wrap break-words">{msg.text}</p>
                 )}
                 {msg.mediaUrl && msg.type === "image" && (
                   <div className="mt-3 group/img relative overflow-hidden rounded-[18px]">
@@ -85,8 +85,8 @@ export default function MessageList({ chatId }: { chatId: string }) {
                     </div>
                   </a>
                 )}
-                <div className={`flex items-center justify-end gap-1.5 mt-1.5 ${isMe ? "text-green-100/70" : "text-zinc-400"}`}>
-                  <span className="text-[9px] font-black uppercase tracking-tighter">
+                <div className={`flex items-center justify-end gap-1.5 mt-2 ${isMe ? "text-blue-100" : "text-text-muted"}`}>
+                  <span className="text-[10px] font-bold uppercase tracking-wider">
                     {msg.timestamp && typeof msg.timestamp.toDate === "function" 
                       ? format(msg.timestamp.toDate(), "HH:mm") 
                       : "..."}
@@ -94,9 +94,9 @@ export default function MessageList({ chatId }: { chatId: string }) {
                   {isMe && (
                     <span className="shrink-0">
                       {msg.status === "seen" ? (
-                        <CheckCheck className="w-3.5 h-3.5 text-blue-200" />
+                        <CheckCheck className="w-3.5 h-3.5 text-white" />
                       ) : msg.status === "delivered" ? (
-                        <CheckCheck className="w-3.5 h-3.5 text-white/60" />
+                        <CheckCheck className="w-3.5 h-3.5 text-white/70" />
                       ) : (
                         <Check className="w-3.5 h-3.5 text-white/50" />
                       )}

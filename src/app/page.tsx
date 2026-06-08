@@ -330,25 +330,25 @@ export default function Home() {
               </>
             ) : (
               // Zenjoy Direct Messages landing view
-              <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-pink to-accent-blue flex items-center justify-center text-white shadow-xl shadow-accent-pink/20 mb-6">
-                  <Sparkles className="w-8 h-8" />
+              <div className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-background">
+                <div className="w-16 h-16 rounded-[24px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-accent-blue shadow-sm mb-6">
+                  <MessageSquare className="w-8 h-8" />
                 </div>
-                <h2 className="text-xl font-black text-pastel-gradient">Welcome to Zenjoy</h2>
-                <p className="text-xs text-zinc-500 mt-2 max-w-sm">
-                  A high-security, custom Discord-styled chat experience. Search a user node or invite your colleagues to collaborate.
+                <h2 className="text-xl font-bold text-foreground">Welcome to Zenjoy</h2>
+                <p className="text-sm text-text-muted mt-2 max-w-sm">
+                  A high-security, custom chat experience. Search a user or invite colleagues to collaborate securely.
                 </p>
                 
-                <div className="grid grid-cols-2 gap-3 max-w-sm mt-8 w-full">
-                  <div className="p-4 bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border dark:border-zinc-900 flex flex-col items-center">
-                    <span className="text-lg mb-1">🔐</span>
-                    <h4 className="text-xs font-black uppercase tracking-wide">E2E Secure</h4>
-                    <p className="text-[10px] text-zinc-400 mt-1">DMs are fully encrypted on your device.</p>
+                <div className="grid grid-cols-2 gap-4 max-w-md mt-10 w-full">
+                  <div className="p-5 bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800 flex flex-col items-center hover:shadow-md transition-shadow">
+                    <ShieldCheck className="w-6 h-6 text-accent-pink mb-3" />
+                    <h4 className="text-sm font-bold text-foreground">E2E Secure</h4>
+                    <p className="text-xs text-text-muted mt-1">DMs are fully encrypted.</p>
                   </div>
-                  <div className="p-4 bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border dark:border-zinc-900 flex flex-col items-center">
-                    <span className="text-lg mb-1">💬</span>
-                    <h4 className="text-xs font-black uppercase tracking-wide">Channels</h4>
-                    <p className="text-[10px] text-zinc-400 mt-1">Create server rooms for teamwork.</p>
+                  <div className="p-5 bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800 flex flex-col items-center hover:shadow-md transition-shadow">
+                    <Hash className="w-6 h-6 text-accent-blue mb-3" />
+                    <h4 className="text-sm font-bold text-foreground">Channels</h4>
+                    <p className="text-xs text-text-muted mt-1">Create server rooms for teamwork.</p>
                   </div>
                 </div>
               </div>
@@ -385,13 +385,13 @@ export default function Home() {
               )
             ) : (
               // Server general dashboard view
-              <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
-                <div className="w-16 h-16 rounded-2xl bg-accent-blue/10 flex items-center justify-center text-accent-blue font-bold text-2xl mb-6">
-                  🏰
+              <div className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-background">
+                <div className="w-16 h-16 rounded-[24px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-accent-blue shadow-sm mb-6">
+                  <Compass className="w-8 h-8" />
                 </div>
-                <h2 className="text-xl font-black">Welcome to {currentServer?.name}</h2>
-                <p className="text-xs text-zinc-500 mt-2 max-w-sm">
-                  Select a text channel on the sidebar to read notes and chat, or jump into a voice channel to speak live with teammates.
+                <h2 className="text-xl font-bold text-foreground">Welcome to {currentServer?.name}</h2>
+                <p className="text-sm text-text-muted mt-2 max-w-md">
+                  Select a text channel on the sidebar to chat, or jump into a voice channel to collaborate live.
                 </p>
               </div>
             )
