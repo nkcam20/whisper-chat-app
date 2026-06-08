@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+:root {
+  /* Default Light Mode - Soft Pastel Theme */
+  --background: #fff5f7; /* Very soft pink tint */
+  --foreground: #2d3142; /* Soft charcoal */
+  
+  --guild-bg: #e6effa; /* Pastel baby blue guild bar */
+  --sidebar-bg: #f3f7fc; /* Gentle light blue sidebar */
+  --chat-bg: #ffffff; /* Clean white chat area */
+  --card-bg: #ffffff;
+  
+  --accent-pink: #f472b6; /* Baby pink accent */
+  --accent-blue: #60a5fa; /* Baby blue accent */
+  --accent-pink-hover: #ec4899;
+  --accent-blue-hover: #3b82f6;
+  
+  --border-color: rgba(226, 232, 240, 0.8);
+  --text-muted: #718096;
+}
+
+.dark {
+  /* Dark Mode - Soft Neon Pastel Cyberpunk */
+  --background: #0f0d13; /* Deep dark violet */
+  --foreground: #f1f3f9;
+  
+  --guild-bg: #070609;
+  --sidebar-bg: #131019; /* Dark violet-pink sidebar */
+  --chat-bg: #181520; /* Dark pastel chat */
+  --card-bg: #1d1a27;
+  
+  --accent-pink: #f472b6;
+  --accent-blue: #60a5fa;
+  --accent-pink-hover: #f472b6;
+  --accent-blue-hover: #60a5fa;
+  
+  --border-color: rgba(255, 255, 255, 0.05);
+  --text-muted: #a0aec0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-guild: var(--guild-bg);
+  --color-sidebar: var(--sidebar-bg);
+  --color-chat: var(--chat-bg);
+  --color-card: var(--card-bg);
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-pink-hover: var(--accent-pink-hover);
+  --color-accent-blue-hover: var(--accent-blue-hover);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+/* Custom scrollbar matching baby pink/blue theme */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(96, 165, 250, 0.15); /* Soft baby blue thumb */
+  border-radius: 20px;
+}
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(244, 114, 182, 0.4); /* Soft baby pink thumb on hover */
+}
+
+/* Elegant glassmorphism class with pink-blue gradient borders */
+.pastel-glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.dark .pastel-glass {
+  background: rgba(24, 21, 32, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Gradient text matching the baby pink/blue theme */
+.text-pastel-gradient {
+  background: linear-gradient(135deg, #f472b6 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Discord logo button and server icons hover transitions */
+.guild-icon-transition {
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.guild-icon-transition:hover, .guild-icon-transition.active {
+  border-radius: 14px;
+  background-color: var(--accent-pink);
+  color: white;
+}
+
+/* Double pulse indicator for secure channel */
+@keyframes secure-pink-blue-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(244, 114, 182, 0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(96, 165, 250, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(96, 165, 250, 0); }
+}
+.secure-pastel-pulse {
+  animation: secure-pink-blue-pulse 2.5s infinite;
+}
+
+/* Speaking glow animation */
+@keyframes speaking-glow {
+  0%, 100% { border-color: var(--accent-blue); box-shadow: 0 0 8px rgba(96, 165, 250, 0.4); }
+  50% { border-color: var(--accent-pink); box-shadow: 0 0 12px rgba(244, 114, 182, 0.6); }
+}
+.speaking-border {
+  animation: speaking-glow 2s infinite ease-in-out;
+}
+
+button, a {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input, textarea {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth page transitions */
+.theme-ready body {
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
